@@ -1,0 +1,2839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elucidation Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+    <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body{
+    margin: 0;
+    background-color: #0f0303;
+    font-family: Poppins, sans-serif;
+    color: #ffffff;
+}
+:root{
+    --item1-transform: translateX(-100%) translateY(-5%) scale(1.5);
+    --item1-filter: blur(30px);
+    --item1-zIndex: 11;
+    --item1-opacity: 0;
+
+    --item2-transform: translateX(0);
+    --item2-filter: blur(0px);
+    --item2-zIndex: 10;
+    --item2-opacity: 1;
+
+    --item3-transform: translate(50%,10%) scale(0.8);
+    --item3-filter: blur(10px);
+    --item3-zIndex: 9;
+    --item3-opacity: 1;
+
+    --item4-transform: translate(90%,20%) scale(0.5);
+    --item4-filter: blur(30px);
+    --item4-zIndex: 8;
+    --item4-opacity: 1;
+    
+    --item5-transform: translate(120%,30%) scale(0.3);
+    --item5-filter: blur(40px);
+    --item5-zIndex: 7;
+    --item5-opacity: 0;
+}
+
+/* Header and Navigation Styling */
+/* Sticky Header */
+header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: #18181884;
+  transition: box-shadow 0.3s;
+}
+header.scrolled {
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+}
+
+
+header .logo{
+  font-weight: bold;
+  font-size: 1.5em;
+  color: #f3cb1a
+}
+
+/* Base styling for nav links */
+header nav a {
+    display: flex; /* Enables flexbox to arrange items horizontally */
+    gap: 30px; /* Space between each link */
+    align-items: center; /* Aligns links vertically center if needed */
+    margin-left: 30px;
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 500;
+    position: relative; /* Needed for the underline animation */
+    transition: color 0.3s ease, transform 0.3s ease; /* Smooth color and scale transitions */
+}
+
+/* Underline hover effect */
+header nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    background-color: #ffbc2a; /* Underline color */
+    transform: scaleX(0); /* Start with no underline */
+    transform-origin: right; /* Start animation from the right */
+    transition: transform 0.3s ease; /* Smooth scaling */
+}
+
+/* Hover effect for color and scale */
+header nav a:hover {
+    color: #ffbc2a; /* New color on hover */
+    transform: scale(1.05); /* Slightly enlarges text on hover */
+}
+
+/* Reveal the underline on hover */
+header nav a:hover::after {
+    transform: scaleX(1); /* Expands underline */
+    transform-origin: left; /* Animation direction from left */
+}
+
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+/* Main navigation styling */
+.main-navigation {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    background-color: #333;
+}
+
+.main-navigation ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.main-navigation li {
+    text-align: center;
+}
+
+.main-navigation a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.1em;
+    padding: 10px 15px;
+    display: inline-block;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+
+
+
+/* Unordered list styling */
+.main-navigation ul {
+    display: flex;
+    justify-content: center;
+    width: 100%; /* Spread items across the full width */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Link styling */
+.main-navigation li {
+    flex-grow: 1; /* Allows items to grow to fill the space */
+    text-align: center;
+}
+
+.main-navigation a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.1em;
+    padding: 10px 15px;
+    display: inline-block;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Hover effect */
+.main-navigation a:hover {
+    color: #ffbc2a; /* Highlight color */
+    background-color: rgba(255, 255, 255, 0.1); /* Optional hover background */
+    border-radius: 5px;
+}
+
+.main-navigation a.active {
+  color: #ffbc2a;
+  font-weight: bold;
+  border-bottom: 2px solid #ffbc2a;
+}
+
+/* Hamburger and Responsive Nav */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1100;
+  position: absolute;
+  right: 20px;
+  top: 10px;
+}
+.nav-toggle span {
+  display: block;
+  width: 28px;
+  height: 3px;
+  margin: 5px 0;
+  background: #ffbc2a;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+@media (max-width: 900px) {
+  .main-navigation ul {
+    flex-direction: column;
+    background: #181818;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100vw;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s;
+  }
+  .main-navigation ul.open {
+    max-height: 400px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  }
+  .nav-toggle {
+    display: flex;
+  }
+}
+/* Image Styling */
+img {
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    display: block;
+    margin: 0 auto 15px;
+}
+
+
+#logo-image {
+  animation: flipIn 5s infinite; /* Continuous animation */
+}
+
+#logo-image:hover {
+  animation: jelly 1s infinite; /* Faster animation on hover */
+}
+
+@keyframes flipIn {
+  0% {
+    transform: rotateY(-90deg);
+    opacity: 0;
+  }
+  100% {
+    transform: rotateY(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes jelly {
+  0%, 100% {
+    transform: scale(1, 1);
+  }
+  25% {
+    transform: scale(1.1, 0.9);
+  }
+  50% {
+    transform: scale(0.9, 1.1);
+  }
+  75% {
+    transform: scale(1.05, 0.95);
+  }
+}
+
+
+
+/* Hero Section Styling */
+.hero {
+    text-align: center;
+    padding: 40px 0px; /* Reduce padding to decrease the vertical space */
+    background-color: #0f0303;
+    color: #e7a515;
+    position: relative;
+    z-index: 1;
+}
+
+.hero h1 {
+    font-size: 4em;
+    margin-bottom: 0.2em;
+    background: linear-gradient(90deg, #ffffff, #ffffff, #ffffff, #cccbc8, #d8d1bf, #e7a515, #e7a515, #e7a515, #e7a515, #ff8800, #ff8800);
+    text-align: center;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero p {
+    font-size: 1.5em;
+    max-width: 600px;
+    margin: 0 auto 1em;
+    line-height: 1.7;
+    padding: 20px;
+    color: #ddd;
+}  
+
+
+.hero .contact-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #e7a51500;
+    color: #ffbc2a;
+    text-decoration: none;
+    font-size: 1.5em;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.hero .contact-button:hover {
+    color: #0a0701;
+    background-color: #ffbc2a;
+}
+
+.swiper {
+  width: 100%;
+  height: 300px; /* Adjust to fit your design */
+  margin-top: 20px;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.wrapper {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  padding: 80px 20px;
+  perspective: 900px;
+}
+
+.container {
+  position: relative;
+  width: 300px;
+  height: 500px;
+  transition: all 0.5s ease;
+  transform: rotateX(30deg) rotateZ(-1deg) scale(0.9); /* Reduced angles and increased scale */
+  perspective: 900px;
+  box-shadow: 0px 20px 50px rgba(0, 0, 0, 0.4);
+  animation: entry 1s linear 1;
+  overflow: hidden;
+  border-radius: 15px;
+  cursor: pointer;
+  transform-origin: center center;
+  margin: 40px 20px;
+}
+
+.container:hover {
+  transform: rotateX(0deg) rotateZ(0deg) scale(1) translateY(-10px);
+  transition: all 0.5s ease;
+  z-index: 400;
+  box-shadow: 0px 30px 60px rgba(0, 0, 0, 0.5);
+}
+
+.image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 45%;
+  overflow: hidden;
+  border-radius: 15px 15px 0 0;
+}
+
+.city img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 15px 15px 0 0;
+  transition: transform 0.4s ease;
+}
+
+.container:hover .city img {
+  transform: scale(1.1);
+}
+
+#i1 {
+  background: linear-gradient(135deg, #59476f 0%, #7b88d1 100%);
+}
+
+#i2 {
+  background: linear-gradient(135deg, #59476f 0%, #7b88d1 100%);
+}
+
+span {
+  position: absolute;
+  top: 0%;
+  left: 55%;
+  border-radius: 100%;
+  background-color: #fff;
+  z-index: 10;
+}
+
+.sun {
+  position: absolute;
+  top: 50%;
+  height: 50%;
+  left: 0%;
+  width: 100%;
+}
+
+.sun1 {
+  width: 50px;
+  height: 50px;
+  box-shadow: 0px 0px 10px #fff;
+}
+
+.st4 {
+  fill: #f8c56f;
+  opacity: 1;
+}
+
+.st5,
+.st7 {
+  fill: #fff;
+}
+
+#sh2 {
+  opacity: 0.5;
+}
+
+#sh3 {
+  opacity: 0.3;
+}
+
+.st6 {
+  fill: #59476f;
+}
+
+.st10 {
+  fill: #c5a7e5;
+  stroke: #222;
+}
+
+.st11 {
+  stroke: #212121;
+  opacity: 0.5;
+}
+
+#sh1 {
+  fill: #f8c56f;
+  opacity: 0.4;
+}
+
+.st0 {
+  fill: #a25a62;
+  stroke: none;
+  stroke-miterlimit: 10;
+}
+
+.st1 {
+  fill: none;
+  stroke: #a25a62;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+}
+
+.st2 {
+  fill: #cd775c;
+}
+
+.st3 {
+  fill: #fff;
+  opacity: 0.3;
+}
+
+.story {
+  position: absolute;
+  top: 45%;
+  left: 0;
+  height: 55%;
+  width: 100%;
+  background: linear-gradient(135deg, #eba65b 0%, #91908e8e 40%);
+  z-index: 2;
+  border-radius: 0 0 15px 15px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box; /* Add this to include padding in width calculation */
+}
+
+.story h3 {
+  width: 100%;
+  text-align: center;
+  text-shadow: 0px 0px 10px #2b2a2a;
+  color: #ffbc2a;
+  letter-spacing: 2px;
+  margin: 0 0 15px 0;
+  font-size: 1.2em;
+}
+
+.story p {
+  width: 100%;
+  font-size: 14px;
+  color: #ffffff;
+  line-height: 1.5;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+#s0 {
+  background: linear-gradient(to bottom, #eba65b 0%, #91908e8e 40%);
+}
+
+#s1 {
+  background: linear-gradient(135deg, #eba65b 0%, #91908e8e 40%);
+}
+
+#s2 {
+  background: linear-gradient(135deg, #eba65b 0%, #91908e8e 40%);
+}
+
+.info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+h3 {
+  text-align: center;
+  text-shadow: 0px 0px 10px #eee;
+  color: #eee;
+  letter-spacing: 2px;
+}
+
+h4 {
+  color: #111;
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  letter-spacing: 2px;
+}
+
+
+
+p {
+  font-size: 14px;
+  color: #fff;
+  padding: 0px 20px 20px 20px;
+  line-height: 150%;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.page {
+  position: absolute;
+  top: 80%;
+  width: 100%;
+  left: 0%;
+  height: 20%;
+  z-index: 30;
+}
+
+.wrapper li {
+  position: absolute;
+  top: 50%;
+  list-style: none;
+  color: #111;
+}
+
+
+.wrapper li:nth-child(1) {
+  left: 15%;
+  animation: simple1 1s linear infinite;
+}
+
+.wrapper li:nth-child(2) {
+  right: 15%;
+  animation: simple 1s linear infinite;
+}
+
+
+@keyframes simple {
+  50% {
+    transform: translateX(10px);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(10px);
+    opacity: 0;
+  }
+}
+
+@keyframes simple1 {
+  50% {
+    transform: translateX(-10px);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(-10px);
+    opacity: 0;
+  }
+}
+
+@keyframes entry {
+  0% {
+    top: -20%;
+    opacity: 0.1;
+    transform: rotateX(30deg) rotateZ(-10deg) scale(0.9);
+  }
+  100% {
+    top: 0%;
+    transform: rotateX(30deg) rotateZ(-10deg) scale(0.9);
+  }
+}
+
+
+
+/* carousel */
+.carousel {
+    position: relative;
+    margin: 0 auto; /* Center carousel horizontally */
+    margin-bottom: 200px; /* Add spacing between carousels */
+    height: 1000px; /* Match the height in the second block */
+    display: flex; /* Use flexbox for centering */
+    align-items: flex-start; /* Adjust alignment to match positioning */
+    justify-content: center; /* Center items horizontally */
+    overflow: hidden;
+}
+
+.carousel .list {
+    position: absolute; /* Match the second block */
+    width: 1140px; /* Fixed width to match the second block */
+    max-width: 90%; /* Keep responsive width */
+    height: 80%; /* Match the second block */
+    left: 45%; /* Offset for centering */
+    transform: translateX(-50%); /* Ensure horizontal centering */
+}
+
+.carousel .list .item {
+    position: absolute; /* Match the second block */
+    left: 0%; /* Start position within the carousel */
+    top: 10%; /* Vertical offset */
+    width: 80%; /* Match the width */
+    height: 100%; /* Match the height */
+    font-size: 17px; /* Same font size */
+    transition: left 0.5s, opacity 0.5s, width 0.5s; /* Match transitions */
+}
+
+.carousel .list .item:nth-child(n + 6){
+    opacity: 0;
+}
+.carousel .list .item:nth-child(2){
+    z-index: 10;
+    transform: translateX(0);
+}
+.carousel .list .item img{
+    width: 51%;
+    position: absolute;
+    right: 0;
+    top: 45%;
+    transform: translateY(-50%);
+    transition: right 1.5s;
+}
+
+.carousel .list .item .introduce{
+    opacity: 0;
+    pointer-events: none;
+}
+.carousel .list .item:nth-child(2) .introduce{
+    opacity: 1;
+    pointer-events: auto;
+    width: 400px;
+    position: absolute;
+    top: 45%;
+    transform:  translateY(-50%);
+    transition: opacity 0.5s;
+}
+.carousel .list .item .introduce .title{
+    color: #ffffff;
+    font-size: 2em;
+    font-weight: 500;
+    line-height: 1em;
+}
+.carousel .list .item .introduce .topic{
+    color: #ffbc2a;
+    font-size: 4em;
+    font-weight: 500;
+}
+.carousel .list .item .introduce .des{
+    font-size: 19px;
+    color: rgb(255, 255, 255);
+}
+
+.carousel .list .item .introduce .seeMore{
+    font-family: Poppins;
+    color: #ddd;
+    margin-top: 1.2em;
+    padding: 5px 0;
+    border: none;
+    border-bottom: 1px solid #ffffff;
+    background-color: transparent;
+    font-weight: bold;
+    letter-spacing: 3px;
+    transition: background 0.5s;
+}
+.carousel .list .item .introduce .seeMore:hover{
+    color: #19d49c;
+    background: #eba81600;
+}
+.carousel .list .item:nth-child(1){
+    transform: var(--item1-transform);
+    filter: var(--item1-filter);
+    z-index: var(--item1-zIndex);
+    opacity: var(--item1-opacity);
+    pointer-events: none;
+}
+.carousel .list .item:nth-child(3){
+    transform: var(--item3-transform);
+    filter: var(--item3-filter);
+    z-index: var(--item3-zIndex);
+}
+.carousel .list .item:nth-child(4){
+    transform: var(--item4-transform);
+    filter: var(--item4-filter);
+    z-index: var(--item4-zIndex);
+}
+.carousel .list .item:nth-child(5){
+    transform: var(--item5-transform);
+    filter: var(--item5-filter);
+    opacity: var(--item5-opacity);
+    pointer-events: none;
+}
+
+/* animation text in item2 */
+.carousel .list .item:nth-child(2) .introduce .title,
+.carousel .list .item:nth-child(2) .introduce .topic,
+.carousel .list .item:nth-child(2) .introduce .des,
+.carousel .list .item:nth-child(2) .introduce .seeMore{
+    opacity: 0;
+    animation: showContent 0.5s 1s ease-in-out 1 forwards;
+}
+@keyframes showContent{
+    from{
+        transform: translateY(-30px);
+        filter: blur(10px);
+    }to{
+        transform: translateY(0);
+        opacity: 1;
+        filter: blur(0px);
+    }
+}
+.carousel .list .item:nth-child(2) .introduce .topic{
+    animation-delay: 1.2s;
+}
+.carousel .list .item:nth-child(2) .introduce .des{
+    animation-delay: 1.4s;
+}
+.carousel .list .item:nth-child(2) .introduce .seeMore{
+    animation-delay: 1.6s;
+}
+
+/* next click */
+.carousel.next .item:nth-child(1){
+    animation: transformFromPosition2 0.5s ease-in-out 1 forwards;
+}
+@keyframes transformFromPosition2{
+    from{
+        transform: var(--item2-transform);
+        filter: var(--item2-filter);
+        opacity: var(--item2-opacity);
+    }
+}
+.carousel.next .item:nth-child(2){
+    animation: transformFromPosition3 0.7s ease-in-out 1 forwards;
+}
+@keyframes transformFromPosition3{
+    from{
+        transform: var(--item3-transform);
+        filter: var(--item3-filter);
+        opacity: var(--item3-opacity);
+    }
+}
+.carousel.next .item:nth-child(3){
+    animation: transformFromPosition4 0.9s ease-in-out 1 forwards;
+}
+@keyframes transformFromPosition4{
+    from{
+        transform: var(--item4-transform);
+        filter: var(--item4-filter);
+        opacity: var(--item4-opacity);
+    }
+}
+.carousel.next .item:nth-child(4){
+    animation: transformFromPosition5 1.1s ease-in-out 1 forwards;
+}
+@keyframes transformFromPosition5{
+    from{
+        transform: var(--item5-transform);
+        filter: var(--item5-filter);
+        opacity: var(--item5-opacity);
+    }
+}
+
+/* previous */
+.carousel.prev .list .item:nth-child(5){
+    animation: transformFromPosition4 0.5s ease-in-out 1 forwards;
+}
+.carousel.prev .list .item:nth-child(4){
+    animation: transformFromPosition3 0.7s ease-in-out 1 forwards;
+}
+.carousel.prev .list .item:nth-child(3){
+    animation: transformFromPosition2 0.9s ease-in-out 1 forwards;
+}
+.carousel.prev .list .item:nth-child(2){
+    animation: transformFromPosition1 1.1s ease-in-out 1 forwards;
+}
+@keyframes transformFromPosition1{
+    from{
+        transform: var(--item1-transform);
+        filter: var(--item1-filter);
+        opacity: var(--item1-opacity);        
+    }
+}
+
+
+/* detail  */
+.carousel .list .item .detail{
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* showDetail */
+.carousel.showDetail .list .item:nth-child(3),
+.carousel.showDetail .list .item:nth-child(4){
+    left: 100%;
+    opacity: 0;
+    pointer-events: none;
+}
+.carousel.showDetail .list .item:nth-child(2){
+    width: 100%;
+}
+.carousel.showDetail .list .item:nth-child(2) .introduce{
+    opacity: 0;
+    pointer-events: none;
+}
+.carousel.showDetail .list .item:nth-child(2) img{
+    right: 50%;
+}
+.carousel.showDetail .list .item:nth-child(2) .detail{
+    opacity: 1;
+    width: 50%;
+    max-width: 600px; /* Prevents it from getting too wide */
+    position: absolute;
+    right: -5%;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: right; /* Align text to the left */
+    pointer-events: auto;
+    max-height: auto; /* Prevents it from overflowing the screen */
+    overflow-y: auto; /* Enables scrolling if the content is too long */
+    padding: 20px; /* Add padding for better spacing */
+}
+
+
+.carousel.showDetail .list .item:nth-child(2) .detail .title {
+    font-size: 2.5em; /* Adjusted font size for better fitting */
+    margin: 10px 0;
+    color: #e7a515; /* Title color */
+    text-align: center;
+}
+
+.carousel.showDetail .list .item:nth-child(2) .detail .des {
+    font-size: 16px; /* Font size for readability */
+    line-height: 1.6; /* Line height to add spacing between lines */
+    max-width: 90%; /* Constrain width to prevent overflow */
+    margin: 0 auto 20px; /* Center-align and add spacing from specifications */
+    text-align: center; /* Center text */
+    color: #ddd; /* Description color */
+    padding: 0 20px; /* Horizontal padding */
+}
+
+
+/* Specifications styling for all screen sizes */
+.carousel.showDetail .list .item:nth-child(2) .detail .specifications {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    padding: 15px;
+    background-color: rgba(26, 26, 26, 0.1);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 100%;
+    margin: 20px auto;
+    box-sizing: border-box;
+}
+
+.carousel.showDetail .list .item:nth-child(2) .detail .specifications div {
+    flex: 1 1 calc(50% - 15px); /* Two columns on larger screens */
+    min-width: 200px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+
+/* Ensure text is always visible */
+.carousel.showDetail .list .item:nth-child(2) .detail .specifications div p {
+    color: #fff;
+    margin: 0;
+}
+
+.carousel.showDetail .list .item:nth-child(2) .detail .specifications div p:nth-child(1) {
+    color: #e7a515;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.carousel.showDetail .list .item:nth-child(2) .detail .specifications div p:nth-child(1) {
+    font-size: 16px;
+    font-weight: bold;
+    color: #e7a515; /* Emphasized color for labels */
+    margin-bottom: 10px;
+}
+
+.carousel.showDetail .list .item:nth-child(2) .detail .specifications div p:nth-child(2) {
+    color: #ddd; /* Lighter text color for content */
+    font-size: 13px;
+}
+
+.carousel.carousel.showDetail .list .item:nth-child(2) .checkout button{
+    font-family: Poppins;
+    background-color: transparent;
+    border: 1px solid #5555;
+    margin-left: 5px;
+    padding: 5px 10px;
+    letter-spacing: 2px;
+    font-weight: 500;
+}
+.carousel.carousel.showDetail .list .item:nth-child(2) .checkout button:nth-child(2){
+    background-color: #693EFF;
+    color: #eee;
+}
+.carousel.showDetail .list .item:nth-child(2) .detail  .title,
+.carousel.showDetail .list .item:nth-child(2) .detail  .des,
+.carousel.showDetail .list .item:nth-child(2) .detail .specifications,
+.carousel.showDetail .list .item:nth-child(2) .detail .checkout{
+    opacity: 0;
+    animation: showContent 0.5s 1s ease-in-out 1 forwards;
+}
+.carousel.showDetail .list .item:nth-child(2) .detail  .des{
+    animation-delay: 1.2s;
+}
+.carousel.showDetail .list .item:nth-child(2) .detail .specifications{
+    animation-delay: 1.4s;
+}
+.carousel.showDetail .list .item:nth-child(2) .detail .checkout{
+    animation-delay: 1.6s;
+}
+/* Arrows Container Styles */
+.arrows{
+    position: absolute;
+    bottom: 80px;
+    width: 1140px;
+    max-width: 90%;
+    display: flex;
+    justify-content: centers;
+    align-items: center;
+    gap: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 100px; /* Increase the value to lower the buttons */
+}
+
+/* General Button Styles */
+#prev-1, #back-1, #next-1, 
+#prev-2, #back-2, #next-2,
+#prev-3, #back-3, #next-3 {
+    position: relative; /* No absolute positioning */
+    padding: 10px 30px; /* Add padding for better button sizing */
+    border: 1px solid #e7a515; /* Button border */
+    border-radius: 5px; /* Rounded corners */
+    background-color: transparent; /* Transparent background */
+    color: #e7a515; /* Text color */
+    font-family: Poppins, sans-serif; /* Use Poppins font */
+    font-weight: bold; /* Make text bold */
+    letter-spacing: 1px; /* Slight spacing between letters */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Add hover effect */
+
+}
+
+/* Hover Effect for Buttons */
+#prev-1:hover, #back-1:hover, #next-1:hover, 
+#prev-2:hover, #back-2:hover, #next-2:hover, 
+#prev-3:hover, #back-3:hover, #next-3:hover {
+    background-color: #e7a515; /* Highlight background on hover */
+    color: #0f0303; /* Darken text on hover */
+}
+
+/* Left-Aligned Buttons (Previous) */
+#prev-1, #prev-2, #prev-3 {
+    margin-right: auto; /* Push buttons to the left */
+}
+
+/* Right-Aligned Buttons (Next) */
+#next-1, #next-2, #next-3 {
+    margin-left: auto; /* Push buttons to the right */
+}
+
+/* Centered Button (See All) */
+#back-1, #back-2, #back-3 {
+    margin: 0 auto; /* Center the button */
+    border: none; /* Remove extra border */
+    border-bottom: 1px solid #e7a515; /* Add underline */
+}
+
+/* Arrows Position Styles (Individual Buttons) */
+#prev-1, #next-1, #back-1,
+#prev-2, #next-2, #back-2,
+#prev-3, #next-3, #back-3 {
+    position: absolute;
+    bottom: 100px; /* Adjust this value to lower each button */
+    transform: translateY(20px); /* Additional lowering of individual buttons */
+}
+
+
+/* Button Positioning for Individual Buttons (1) */
+#prev-1 {
+    left: 10%; /* Set distance from the left */
+    top: 50%; /* Vertically center relative to parent */
+    transform: translateY(-50%); /* Adjust for true centering */
+}
+
+#next-1 {
+    right: 10%; /* Set distance from the right */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#back-1 {
+    z-index: 100;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: none;
+    border-bottom: 1px solid #e7a515;
+    font-family: Poppins;
+    font-weight: bold;
+    color: #e7a515;
+    letter-spacing: 3px;
+    background-color: transparent;
+    padding: 10px;
+    transition: opacity 0.5s;
+}
+
+/* Button Positioning for Individual Buttons (2) */
+#prev-2 {
+    left: 10%; /* Set distance from the left */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#next-2 {
+    right: 10%; /* Set distance from the right */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#back-2 {
+    z-index: 100;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: none;
+    border-bottom: 1px solid #e7a515;
+    font-family: Poppins;
+    font-weight: bold;
+    color: #e7a515;
+    letter-spacing: 3px;
+    background-color: transparent;
+    padding: 10px;
+    transition: opacity 0.5s;
+}
+
+/* Button Positioning for Individual Buttons (3) */
+#prev-3 {
+    left: 10%; /* Set distance from the left */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#next-3 {
+    right: 10%; /* Set distance from the right */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#back-3 {
+    z-index: 100;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: none;
+    border-bottom: 1px solid #e7a515;
+    font-family: Poppins;
+    font-weight: bold;
+    color: #e7a515;
+    letter-spacing: 3px;
+    background-color: transparent;
+    padding: 10px;
+    transition: opacity 0.5s;
+}
+
+.carousel.showDetail #back{
+    opacity: 1;
+}
+.carousel.showDetail #prev,
+.carousel.showDetail #next{
+    opacity: 0;
+    pointer-events: none;
+}
+.carousel::before{
+    width: 500px;
+    height: 300px;
+    content: '';
+    background-image: linear-gradient(70deg, #DC422A, blue);
+    position: absolute;
+    z-index: -1;
+    border-radius: 20% 30% 80% 10%;
+    filter: blur(150px);
+    top: 50%;
+    left: 50%;
+    transform: translate(-10%, -50%);
+    transition: 1s;
+}
+.carousel.showDetail::before{
+    transform: translate(-100%, -50%) rotate(90deg);
+    filter: blur(130px);
+} 
+
+/* === MOBILE: max 768px === */
+@media (max-width: 768px) {
+  .carousel .list .item {
+    width: 110%;
+    font-size: 60%;
+    height: 120%;
+  }
+
+  .carousel .list .item .introduce {
+    font-size: 10px;
+    max-width: 65vw;
+
+  }
+
+  .carousel .list .item .introduce .des {
+    font-size: 16px;
+    max-width: 65vw;
+    max-height: 100px;      /* Adjust this value as needed */
+    overflow-y: auto;      /* Enables vertical scrolling */
+    word-break: break-word;
+    white-space: normal;   /* Allows wrapping */
+    margin: 0 auto;
+    padding-right: 8px;    /* Optional: space for scrollbar */
+    margin-left: 0;
+    margin-right: auto;
+    background: rgba(0, 0, 0, 0.127);
+    border-radius: 8px;
+    padding: 10px 16px;
+    color: #fff;
+  }
+
+
+
+  .carousel.showDetail .list .item:nth-child(2) .detail {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    height: 95%;
+    max-height: 85vh;
+    overflow-y: auto;
+    margin: 0 auto;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  .carousel.showDetail .list .item:nth-child(2) .detail .specifications {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin: 20px 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .carousel.showDetail .list .item:nth-child(2) .detail .specifications div {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 0.95em;
+    color: #fff;
+  }
+
+  .carousel.showDetail .list .item:nth-child(2) .detail .specifications div p {
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+    word-break: break-word;
+  }
+  
+}
+
+/* === TABLET: 769px - 1024px === */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .carousel .list .item {
+    width: 95%;
+    font-size: 17px;
+  }
+
+  .carousel.showDetail .list .item:nth-child(2) .detail {
+    width: 150%;
+    height: 95%;
+    max-height: 85vh;
+    overflow-y: auto;
+    margin: 0 auto;
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.85);
+    border-radius: 10px;
+    box-sizing: border-box;
+  }
+
+  .carousel.showDetail .list .item:nth-child(2) .detail .specifications {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 10px;
+  }
+
+  .carousel.showDetail .list .item:nth-child(2) .detail .specifications div {
+    flex: 1 1 calc(50% - 10px);
+    background: rgba(255, 255, 255, 0.08);
+    padding: 12px;
+    border-radius: 6px;
+  }
+}
+
+/* === DESKTOP: 1025px and above === */
+@media (min-width: 1025px) {
+  .carousel.showDetail .list .item:nth-child(2) .detail {
+    width: 100%;
+    max-width: 100%;
+    position: absolute;
+    right: -5%;
+    top: 50%;
+    transform: translateY(-50%);
+    overflow-y: auto;
+    max-height: 85vh;
+    text-align: right;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.85);
+    border-radius: 10px;
+    box-sizing: border-box;
+  }
+
+  .carousel.showDetail .list .item:nth-child(2) .detail .specifications {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    padding: 15px;
+    background-color: rgba(26, 26, 26, 0.1);
+    border-radius: 8px;
+    max-width: 100%;
+    margin: 20px auto;
+    box-sizing: border-box;
+  }
+}
+
+/* Modern Card Grid Styles */
+.projects-section {
+  max-width: 1200px;
+  margin: 60px auto 40px auto;
+  padding: 0 16px;
+  text-align: center;
+}
+.projects-section h2 {
+  font-size: 2.2em;
+  color: #ffbc2a;
+  margin-bottom: 32px;
+  letter-spacing: 1px;
+}
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 32px;
+}
+.project-card {
+  background: #181818;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.project-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+}
+.project-card img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  background: #222;
+}
+.project-content {
+  padding: 20px 18px 24px 18px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.project-content h3 {
+  color: #ffbc2a;
+  font-size: 1.2em;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+.project-content p {
+  color: #eee;
+  font-size: 1em;
+  line-height: 1.5;
+  margin: 0;
+}
+@media (max-width: 600px) {
+  .projects-section h2 {
+    font-size: 1.4em;
+  }
+  .project-content {
+    padding: 14px 8px 18px 8px;
+  }
+}
+
+/* Sleek Hero Slider Styles */
+.hero-slider-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 40px auto 60px auto;
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  background: #18181856;
+}
+.heroSwiper {
+  width: 100%;
+  height: 600px;
+}
+.heroSwiper .swiper-slide {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  height: 600px;
+  overflow: hidden;
+}
+.heroSwiper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
+  transition: transform 1.2s cubic-bezier(.77,0,.18,1);
+}
+.heroSwiper .swiper-slide-active img {
+  transform: scale(1.05);
+}
+.slide-caption {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 30px 60px 60px 60px;
+  color: #fff;
+  background: linear-gradient(0deg, rgba(24,24,24,0.85) 60%, rgba(24,24,24,0.1) 100%);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s, transform 0.7s;
+  pointer-events: none;
+}
+.swiper-slide-active .slide-caption {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.slide-caption h2 {
+  font-size: 3em;
+  color: #ffbc2a;
+  margin-bottom: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.slide-caption p {
+  font-size: 1.4em;
+  color: #eee;
+  margin: 0;
+  line-height: 1.5;
+}
+.hero-swiper-btn {
+  background: rgba(24,24,24,0.5);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ffbc2a;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  transition: background 0.3s;
+}
+.hero-swiper-btn:after {
+  font-size: 1.6em;
+}
+.hero-swiper-btn:hover {
+  background: rgba(24,24,24,0.85);
+}
+.swiper-pagination-bullet {
+  background: #ffbc2a;
+  opacity: 0.7;
+}
+.swiper-pagination-bullet-active {
+  background: #fff;
+  opacity: 1;
+}
+@media (max-width: 700px) {
+  .hero-slider-container, .heroSwiper { height: 260px; }
+  .slide-caption { padding: 18px 12px 12px 12px; }
+  .slide-caption h2 { font-size: 1.2em; }
+  .slide-caption p { font-size: 0.95em; }
+}
+
+.hero h1, .hero p, .hero .contact-button {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: heroFadeIn 1s forwards;
+}
+.hero h1 { animation-delay: 0.2s; }
+.hero p { animation-delay: 0.5s; }
+.hero .contact-button { animation-delay: 0.8s; }
+
+@keyframes heroFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive hero slider for mobile and tablet */
+@media (max-width: 1024px) {
+  .hero-slider-container,
+  .heroSwiper,
+  .heroSwiper .swiper-slide {
+    height: 40vh !important; /* 40% of viewport height, adjust as needed */
+    min-height: 180px;
+    max-height: 400px;
+  }
+  .heroSwiper img {
+    height: 100% !important;
+    width: 100% !important;
+    object-fit: cover;
+  }
+  .slide-caption {
+    padding: 10px 8px 16px 8px;
+  }
+  .slide-caption h2 {
+    font-size: 1.2em;
+  }
+  .slide-caption p {
+    font-size: 0.95em;
+  }
+}
+
+.swiper-progress-bar {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 5px;
+  width: 100%;
+  background: rgba(255,255,255,0.08);
+  z-index: 10;
+  overflow: hidden;
+}
+.swiper-progress-bar .progress {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #ffbc2a, #e7a515);
+  transition: width 0.1s linear;
+}
+
+.carousel.showDetail .list .item:nth-child(2) .detail {
+  animation: fadeInDetail 0.7s cubic-bezier(.77,0,.18,1);
+}
+@keyframes fadeInDetail {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+#backToTop {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  background: #ffbc2a;
+  color: #181818;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 2em;
+  display: none;
+  cursor: pointer;
+  z-index: 2000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  transition: opacity 0.3s;
+}
+#backToTop.show { display: block; }
+    </style>
+</head>
+<body>
+    
+
+<header>
+    <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    <nav class="main-navigation">
+        <ul>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#expertise">Our Expertise</a></li>
+            <li><a href="#approach">Our Approach</a></li>
+            <li><a href="#impact">Our Impact</a></li>
+            <li><a href="#future">Our Future</a></li>
+                <li><a href="#services-hero">Our Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    
+</header>
+
+<img id="logo-image" src="C:\Users\user\Documents\Elucidation Hub\images\logo.png" />
+
+
+<!-- Hero Section -->
+<section class="hero" data-aos="zoom-in">
+  <h1>Welcome to Elucidation Hub</h1>
+  <p>Elucidation Hub is a leading PR and Communications Consultancy dedicated to enhancing brand visibility and credibility through innovative strategies. We partner with clients worldwide to navigate the complexities of modern communication.</p>
+  <a href="#contact" class="contact-button">Contact Us</a>
+
+</section>
+
+<div class="hero-slider-container">
+    <div class="swiper heroSwiper">
+      <div class="swiper-wrapper">
+        <!-- Slide 1 -->
+        <div class="swiper-slide">
+          <img src="C:\Users\user\OneDrive\Documents\Elucidation Hub\images\PHOTO-2025-04-12-07-37-10.jpg" alt="Visa Center" />
+          <div class="slide-caption">
+            <h2>The Visa Center</h2>
+            <p>Through targeted PR campaigns, Elucidation Hub helped The Visa Center increase outreach and engagement—making visa support easier, clearer, and more accessible.</p>
+          </div>
+        </div>
+        <!-- Slide 2 -->
+        <div class="swiper-slide">
+          <img src="C:\Users\user\OneDrive\Documents\Elucidation Hub\images\PHOTO-2024-11-04-13-22-32.jpg" alt="SADC Youth Business Forum" />
+          <div class="slide-caption">
+            <h2>SADC Youth Business Forum</h2>
+            <p>Elucidation Hub showed up strong at the first-ever SADC Youth Business Forum, contributing to regional dialogue on youth entrepreneurship and innovation.</p>
+          </div>
+        </div>
+        <!-- Slide 3 -->
+        <div class="swiper-slide">
+          <img src="C:\Users\user\OneDrive\Documents\Elucidation Hub\images\PHOTO-2024-08-27-11-14-29.jpg" alt="Magandi Park" />
+          <div class="slide-caption">
+            <h2>Magandi Park</h2>
+            <p>Elucidation Hub played a pivotal role in the development and promotion of Magandi Park, enhancing community engagement and environmental awareness.</p>
+          </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="swiper-slide">
+          <img src="C:\Users\user\OneDrive\Documents\Elucidation Hub\images\Cheetah Express Logistics logo.jpg" alt="Cheetah Express Logistics" />
+          <div class="slide-caption">
+            <h2>Cheetah Express Logistics</h2>
+            <p>Fast, fierce, and focused — Elucidation Hub sharpened Cheetah Express’s message for lightning-fast delivery impact across Southern Africa.</p>
+            </div>
+        </div>
+        <!-- Slide 5 -->
+        <div class="swiper-slide">
+          <img src="C:\Users\user\OneDrive\Documents\Elucidation Hub\images\Caesar's Potion Logo_page-0001.jpg" alt="Caeser's Potion" />
+          <div class="slide-caption">
+            <h2>Caeser's Potion</h2>
+            <p>Elucidation Hub bottled bold storytelling to craft a refreshing brand image for Caeser's Potion—blending tradition, taste, and a splash of magic.</p>
+          </div>
+        </div>
+          
+          <!-- Slide 6 -->
+        <div class="swiper-slide">
+            <img src="C:\Users\user\OneDrive\Documents\Elucidation Hub\images\Aviocean logo 4 0_page-0001.jpg" alt="Aviocean Logistics" />
+            <div class="slide-caption">
+              <h2>Aviocean Logistics</h2>
+              <p>From ocean to sky, Elucidation Hub helped Aviocean Logistics redefine speed, security, and trust in regional supply chain communications.</p>
+            </div>
+        </div>
+              
+        <!-- Slide 7 -->
+        <div class="swiper-slide">
+            <img src="C:\Users\user\OneDrive\Documents\Elucidation Hub\images\FedEx Express logo.jpg" alt="FedEx Express" />
+            <div class="slide-caption">
+                <h2>FedEx Express</h2>
+                <p>Elucidation Hub delivered clarity and reach to FedEx Express's audience, helping amplify a globally trusted voice through local connection.</p>
+            </div>
+        </div>
+
+      </div>
+      <!-- Navigation buttons -->
+      <div class="swiper-button-prev hero-swiper-btn"></div>
+      <div class="swiper-button-next hero-swiper-btn"></div>
+      <!-- Pagination (optional) -->
+      <div class="swiper-pagination"></div>
+      <div class="swiper-progress-bar"><div class="progress"></div></div>
+    </div>
+  </div>
+
+<section class="projects-section" data-aos="fade-up">
+    <h2>Our Impactful Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+        <img src="C:\Users\user\OneDrive\Documents\Elucidation Hub\images\PHOTO-2025-04-12-07-37-10.jpg" alt="Visa Center Logo" />
+        <div class="project-content">
+          <h3>The Visa Center</h3>
+          <p>Through targeted PR campaigns, Elucidation Hub helped The Visa Center increase outreach and engagement—making visa support easier, clearer, and more accessible.</p>
+        </div>
+      </div>
+
+      <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+        <img src="C:\Users\user\OneDrive\Documents\Elucidation Hub\images\PHOTO-2024-11-04-13-22-32.jpg" alt="SADC Youth Business Forum" />
+        <div class="project-content">
+          <h3>Inaugural SADC Youth Business Forum</h3>
+          <p>Elucidation Hub showed up strong at the first-ever SADC Youth Business Forum, contributing to regional dialogue on youth entrepreneurship and innovation.</p>
+        </div>
+      </div>
+
+      <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+        <img src="C:\Users\user\OneDrive\Documents\Elucidation Hub\images\PHOTO-2024-08-27-11-14-29.jpg" alt="Magandi Park" />
+        <div class="project-content">
+          <h3>Inaugural SADC Youth Business Forum</h3>
+          <p>Elucidation Hub showed up strong at the first-ever SADC Youth Business Forum, contributing to regional dialogue on youth entrepreneurship and innovation.</p>
+        </div>
+      </div>  
+
+      <div class="project-card" data-aos="fade-up" data-aos-delay="400">
+        <img src="C:\Users\user\OneDrive\Documents\Elucidation Hub\images\Cheetah Express Logistics logo.jpg" alt="Chef Mandie's Flavor Hub" />
+        <div class="project-content">
+          <h3>Cheetah Express Logistics:</h3>
+          <p>Fast, fierce, and focused — Elucidation Hub sharpened Cheetah Express’s message for lightning-fast delivery impact across Southern Africa.</p>
+        </div>
+      </div>  
+
+      <div class="project-card" data-aos="fade-up" data-aos-delay="500">
+        <img src="C:\Users\user\OneDrive\Documents\Elucidation Hub\images\Caesar's Potion Logo_page-0001.jpg" alt="Caeser's Potion" />
+        <div class="project-content">
+          <h3>Caeser's Potion:</h3>
+          <p>Elucidation Hub bottled bold storytelling to craft a refreshing brand image for Caeser's Potion—blending tradition, taste, and a splash of magic.</p>
+        </div>
+      </div> 
+      
+      <div class="project-card" data-aos="fade-up" data-aos-delay="600">
+        <img src="C:\Users\user\OneDrive\Documents\Elucidation Hub\images\Aviocean logo 4 0_page-0001.jpg" alt="Aviocean Logistics" />
+        <div class="project-content">
+          <h3>Aviocean Logistics:</h3>
+          <p>From ocean to sky, Elucidation Hub helped Aviocean Logistics redefine speed, security, and trust in regional supply chain communications</p>
+        </div>
+      </div>
+
+      <div class="project-card" data-aos="fade-up" data-aos-delay="700">
+        <img src="C:\Users\user\OneDrive\Documents\Elucidation Hub\images\Aviocean logo 4 0_page-0001.jpg" alt="Aviocean Logistics" />
+        <div class="project-content">
+          <h3>FedEx Express::</h3>
+          <p>Elucidation Hub delivered clarity and reach to FedEx Express's audience, helping amplify a globally trusted voice through local connection.
+        </p>
+        </div>
+      </div> 
+
+      <div class="project-card" data-aos="fade-up" data-aos-delay="800">
+        <img src="C:\Users\user\OneDrive\Documents\Elucidation Hub\images\PHOTO-2025-01-12-18-04-17.jpg" alt="Chef Mandie's Flavor Hub" />
+        <div class="project-content">
+          <h3>Chef Mandie's Flavour Hub:</h3>
+          <p>Elucidation Hub worked with Chef Mandie's Flavour Hub to spice up their brand presence, driving customer engagement & helping bring mouthwatering flavors and a unique culinary experience to food lovers everywhere.</p>
+        </div>
+      </div>   
+      
+
+	<div class="page">
+	<h4></h4>
+	<ul><li> </li>
+
+	<li> </li>
+	</ul>
+	</div>
+
+</div>
+
+    <div class="carousel">
+        <div class="list">
+            <div class="item" id="about">
+                <img src="C:\Users\user\Documents\Elucidation Hub\images\call-center-1015274_1920-removebg-preview.png">
+                <div class="introduce">
+                    <div class="title">CONTACT US</div>
+                    <div class="topic">How do you get in touch?</div>
+                    <div class="des">
+                        
+                        For more information, or to discuss how Elucidation Hub
+                      can assist with your PR and communication needs, please click on the link below.
+                    </div>
+                    <button class="seeMore">SEE MORE ↗</button>
+                </div>
+                <div class="detail">
+                    <div class="title">We’re here</div>
+                    <div class="des">
+                        
+                        to connect, collaborate, and help bring your vision to life. Whether you’re looking for strategic PR solutions, need assistance navigating a communications challenge, or simply want to learn more about our services, we’re just a message away.
+
+                        At Elucidation Hub, we value every inquiry and strive to respond promptly and thoughtfully. Reach out to us via phone, email, or through our contact form, and let’s discuss how we can support your goals. We look forward to partnering with you and creating impactful communication strategies together
+                                            </div>
+                    <div class="specifications">
+                        <div>
+                            <p>X (Formerly Twitter)</p>
+                            <p></p>
+                        </div>
+
+                        <a href="https://www.facebook.com/profile.php?id=61551458302995" target="_blank" style="text-decoration: none; color: inherit;">
+                            <div>
+                                <p>Facebook</p>
+                                <p>Elucidation Hub</p>
+                            </div>
+                        </a>
+                        
+
+                        <a href="https://www.instagram.com/elucidationhub" target="_blank" style="text-decoration: none; color: inherit;">
+    <div>
+        <p>Instagram</p>
+        <p>Elucidation Hub</p>
+    </div>
+</a>
+
+                        <div>
+                            <p>Email</p>
+                            <p></p>
+                        </div>
+                        <div>
+                            <p>Phone Number</p>
+                            +263 (0) 775 864 565
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item" id="expertise">
+                <img src="C:\Users\user\Documents\Elucidation Hub\images\punctuation-marks-1019729_1920-removebg-preview.png">
+                <div class="introduce">
+                    <div class="title">ABOUT US</div>
+                    <div class="topic">Who Are We</div>
+                    <div class="des">
+                        
+                        Elucidation Hub is a progressive Public Relations (PR) and
+                        Communications Consultancy firm founded in 2023.
+                        
+                        We pride ourselves on our innovative and dynamic approach
+                        to solving communication challenges.
+                        Our firm is based in Harare Zimbabwe, but we operate on a
+                        global scale, serving clients ranging from startups to
+                        Fortune 500 companies across various industries
+
+                    </div>
+
+                    <button class="seeMore">SEE MORE ↗</button>
+                </div>
+                
+                <div class="detail">
+                    <div class="title">Elucidation Hub</div>
+                    <div class="des">
+                        
+                        is a Public Relations (PR) and Communications Consultancy firm based in Harare, Zimbabwe. We craft strategic, impactful communication solutions tailored to each client's unique needs, helping brands navigate challenges with confidence.
+
+                        Our global services span industries such as technology, finance, healthcare, and retail, supporting startups to Fortune 500 companies. With expertise in building credibility, managing reputations, and driving engagement, we ensure your message resonates authentically in today’s dynamic world.
+                        
+                        Our experienced team bridges communication gaps, fosters strong relationships, and empowers brands to reach their highest potential. At Elucidation Hub, your story matters—and we’re here to help it shine.  
+                    </div>
+                    <div class="specifications">
+                        <div>
+                            <p>Founded In</p>
+                            <p>2023</p>
+                        </div>
+                        <div>
+                            <p>Our Headquarters</p>
+                            <p>Harare, Zimbabwe</p>
+                        </div>
+                        <div>
+                            <p>Based In</p>
+                            <p>Harare, Zimbabwe</p>
+                        </div>
+                        <div>
+                            <p>Specialize In</p>
+                            <p>Public Relations (PR) & Communication Consultancy</p>
+                        </div>
+                        <div>
+                            <p>Clientele</p>
+                            <p>Startups & Emerging Brands, Fortune 500 Companies and Large Corporations, Nonprofits and NGOs, Tech and Innovation Companies, Healthcare and Wellness Brands, Financial and Professional Services Firms, Retail and Consumer Goods Companies, Government Agencies and Public Sector Organizations, Global and Remote Companies Seeking International PR</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="item" id="approach">
+                <img src="C:\Users\user\Documents\Elucidation Hub\images\i-1020105_1920-removebg-preview.png">
+                <div class="introduce">
+                    <div class="title">OUR EXPERTISE</div>
+                    <div class="topic">What exactly do we do?</div>
+                    <div class="des">
+                        
+                        Our team of experienced PR and communication experts combines deep industry knowledge with innovative strategies. We specialize in crisis management, brand building, media relations, and digital PR, blending traditional and modern approaches to keep our clients ahead in their fields.                    
+                    </div>
+                    <button class="seeMore">SEE MORE ↗</button>
+                </div>
+                <div class="detail">
+                    <div class="title">Here At Elucidation Hub</div>
+                    <div class="des">
+                        
+                        Our team of seasoned PR & Communication experts brings a wealth of industry knowledge and experience to
+                        the table.
+                        We specialize in crisis communications, brand building,
+                        media
+                        relations, digital PR, and corporate communications.
+                        
+                        We integrate traditional PR techniques with cutting-edge
+                        digital communication strategies to ensure our clients
+                        remain at the
+                        forefront of their respective industries.
+                      </div>
+                    <div class="specifications">
+                        <div>
+                            <p>Our Team</p>
+                            <p>Skilled & Experienced with extensive PR and Communication expertise</p>
+                        </div>
+                        <div>
+                            <p>Crisis Communications</p>
+                            <p>Specialists in managing crises to protect and restore brand reputation</p>
+                        </div>
+                        <div>
+                            <p>Brand Building</p>
+                            <p>Strategies to establish and enhance brand identity and market presence</p>
+                        </div>
+                        <div>
+                            <p>Media Relations & Digital PR</p>
+                            <p>Effective engagement with media and digital channels for maximum reach</p>
+                        </div>
+                        <div>
+                            <p>Traditional & Digital Integration</p>
+                            <p>Blending classic PR with modern digital strategies to keep clients ahead in their industries</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item" id="impact">
+                <img src="C:\Users\user\Documents\Elucidation Hub\images\team-1015712_1920-removebg-preview.png">
+                <div class="introduce">
+                    <div class="title">OUR APPROACH</div>
+                    <div class="topic">What is our "How"?</div>
+                    <div class="des">
+
+                        Our approach is centered around understanding each client’s unique needs and delivering tailored communication strategies that drive results                    </div>
+                    <button class="seeMore">SEE MORE ↗</button>
+                </div>
+                <div class="detail">
+                    <div class="title">Because of our approach</div>
+                    <div class="des">
+                        
+                        We collaborate closely with clients to align their goals with our strategies, blending data-driven insights and creativity to deliver solutions for immediate challenges and long-term growth. With a focus on transparency, adaptability, and proactive problem-solving, we navigate the evolving media landscape. Leveraging traditional PR and cutting-edge digital communication, we position clients as industry leaders, fostering authentic connections and lasting relationships with their audiences.                    </div>
+                    <div class="specifications">
+                        <div>
+                            <p>Client-Centered Strategy</p>
+                            <p>We prioritize understanding each client’s unique goals and creating customized strategies to meet them</p>
+                        </div>
+                        <div>
+                            <p>Collaborative Process</p>
+                            <p>Our approach is built on close collaboration, ensuring alignment between client objectives and our efforts</p>
+                        </div>
+                        <div>
+                            <p>Data-Driven & Creative Solutions</p>
+                            <p>By merging insights with creativity, we craft solutions that address both immediate and long-term needs</p>
+                        </div>
+                        <div>
+                            <p>Transparency & Agility</p>
+                            <p>We value openness and flexibility, adapting to changes in the media landscape to keep clients ahead</p>
+                        </div>
+                        <div>
+                            <p>Integrated PR Techniques</p>
+                            <p>Our approach blends traditional PR with cutting-edge digital strategies to help clients connect authentically and build lasting relationships</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item" id="future">
+                <img src="C:\Users\user\Documents\Elucidation Hub\images\male-2339841_1920-removebg-preview.png">
+                <div class="introduce">
+                    <div class="title">OUR IMPACT</div>
+                    <div class="topic">How are we effective?</div>
+                    <div class="des">
+                        
+                        We have a proven track record of improving brand image, increasing media exposure, and driving engagement to new heights.                     </div>
+                    <button class="seeMore">SEE MORE ↗</button>
+                </div>
+                <div class="detail">
+                    <div class="title">Our impact is</div>
+                    <div class="des">
+                        
+                        measured by the meaningful results we deliver for our clients across industries. Through tailored communication strategies, we help brands strengthen their reputation, foster genuine connections, and navigate challenges with confidence. Our clients have seen measurable improvements in brand visibility, audience engagement, and media presence, positioning them as leaders in their fields                    </div>
+                    <div class="specifications">
+                        <div>
+                            <p>Measurable Results</p>
+                            <p>Delivering clear improvements in brand visibility, audience engagement, and media presence</p>
+                        </div>
+                        <div>
+                            <p>Reputation Strengthening</p>
+                            <p>Helping clients build and maintain a strong, trustworthy reputation in their industries</p>
+                        </div>
+                        <div>
+                            <p>Genuine Connections</p>
+                            <p>Fostering authentic relationships between brands and their audiences</p>
+                        </div>
+                        <div>
+                            <p>Industry Leadership</p>
+                            <p>Positioning clients as leaders through impactful communication strategies</p>
+                        </div>
+                        <div>
+                            <p>Long-Term Growth & Success</p>
+                            <p>Committing to lasting impact that supports clients’ continued growth and achievement</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item" id="contact">
+                <img src="C:\Users\user\Documents\Elucidation Hub\images\path-1020288_1920-removebg-preview.png">
+                <div class="introduce">
+                    <div class="title">OUR FUTURE</div>
+                    <div class="topic">What lies ahead?</div>
+                    <div class="des">
+                        
+                        As we look to the future, Elucidation Hub is committed to
+
+                        remaining at the forefront of PR and
+                        
+                        communications, embracing new technologies and adapting
+                        
+                        to the changing media landscape.
+                        
+                        We are excited about the opportunities ahead, as we continue
+                        
+                        to help our clients illuminate their
+                        stories and connect with their audiences
+   
+                    </div>
+                    <button class="seeMore">SEE MORE ↗</button>
+                </div>
+                <div class="detail">
+                    <div class="title">The Future Of Elucidation Hub</div>
+                    <div class="des">
+                        
+                        lies in innovation, growth, and meeting evolving client needs. By leveraging emerging technologies and industry trends, we aim to become a global leader in PR and communications, recognized for adaptability, creativity, and results-driven strategies. Our vision focuses on deepening client relationships, expanding expertise, and setting new industry standards, empowering clients to thrive in a rapidly changing world.
+                      
+                    </div>
+                    <div class="specifications">
+                        <div>
+                            <p>Commitment to Innovation</p>
+                            <p>Continuously developing new, cutting-edge communication strategies</p>
+                        </div>
+                        <div>
+                            <p>Staying Ahead of Trends</p>
+                            <p>Leveraging emerging technologies and staying in sync with industry changes</p>
+                        </div>
+                        <div>
+                            <p>Global Leadership Vision</p>
+                            <p>Aiming to become a recognized leader in PR and communications worldwide</p>
+                        </div>
+                        <div>
+                            <p>Strengthening Client Relationships</p>
+                            <p>Deepening connections with clients to better serve their evolving needs</p>
+                        </div>
+                        <div>
+                            <p>Empowering Clients in a Changing World</p>
+                            <p>Enabling clients to thrive by setting new industry standards and adapting to future challenges</p>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="arrows">
+            <button id="prev-1"></button>
+            <button id="next-1">></button>
+            <button id="back-1">See All ↗</button>
+        </div>   
+    </div>
+
+<!-- Second Hero Section -->
+<section class="hero" id="services-hero" data-aos="fade-up">
+    <h1>Discover Our Services</h1>
+    <p>At Elucidation Hub, we provide a diverse range of services designed to elevate your brand and communication strategy. 
+        From impactful social media management to compelling content creation, our offerings are tailored to meet your unique needs. 
+        Explore how our expertise can empower your business to connect, engage, and thrive in a dynamic world.</p>
+        <a href="#social-media-management" class="contact-button">Explore Services</a>
+  </section>
+
+    <div class="carousel">
+        <div class="list">
+            <div class="item" id="social-media-management">
+                <img src="C:\Users\user\Documents\Elucidation Hub\images\app-1816210_1920-removebg-preview.png">
+                <div class="introduce">
+                    <div class="title">SOCIAL MEDIA MANAGEMENT</div>
+                    <div class="topic">Engage. Influence. Connect.</div>
+                    <div class="des">
+                        
+                        We craft and execute impactful social media strategies, managing content calendars and engaging audiences across platforms to boost your online presence and foster meaningful connections.
+                    </div>
+                    <button class="seeMore">SEE MORE ↗</button>
+                </div>
+                <div class="detail">
+                    <div class="title">How do we make your brand social?</div>
+                    <div class="des">
+                        
+                        Transforming Online Presence ~~~~ Our team crafts tailored social media strategies that engage audiences, manage content calendars, and boost your online visibility. We make your brand a standout across platforms, fostering authentic connections with your audience.
+                                            </div>
+                    <div class="specifications">
+                        <div>
+                            <p>Strategic Planning</p>
+                            <p>Creating tailored strategies for each platform.</p>
+                        </div>
+                        <div>
+                            <p>Content Calendar Management</p>
+                            <p>Scheduling and organizing posts for consistent engagement.</p>
+                        </div>
+                        <div>
+                            <p>Audience Interaction</p>
+                            <p>Building relationships through meaningful engagements.</p>
+                        </div>
+                        <div>
+                            <p>Analytics and Insights</p>
+                            <p>Measuring performance to refine future strategies.</p>
+                        </div>
+                        <div>
+                            <p>Platform Versatility</p>
+                            <p>Managing presence across multiple social networks.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item" id="media-relations">
+                <img src="C:\Users\user\Documents\Elucidation Hub\images\meet-1020146_1920-removebg-preview.png">
+                <div class="introduce">
+                    <div class="title">MEDIA RELATIONS</div>
+                    <div class="topic">Build Bridges with the Media.</div>
+                    <div class="des">
+
+                        At Elucidation Hub, we excel in Media Relations by fostering meaningful connections with journalists, media outlets, and influencers to enhance brand visibility and credibility. Our expertise extends to community relations, creating impactful outreach programs that promote corporate social responsibility while strengthening local ties
+                    
+                    </div>
+
+                    <button class="seeMore">SEE MORE ↗</button>
+                </div>
+                
+                <div class="detail">
+                    <div class="title">How do we connect with the media?</div>
+                    <div class="des">
+                        
+                        Bridging Brands and Media ~~~~ We help you build strong relationships with journalists, media outlets, and influencers, amplifying your brand's voice. With our expertise, your message will gain visibility and credibility, ensuring maximum impact across traditional and digital platforms.
+  
+                    </div>
+                    <div class="specifications">
+                        <div>
+                            <p>Media Connections</p>
+                            <p>Building relationships with journalists and outlets for better coverage.</p>
+                        </div>
+                        <div>
+                            <p>Influencer Engagement</p>
+                            <p>Partnering with influencers to enhance visibility and reach.</p>
+                        </div>
+                        <div>
+                            <p>Strategic Messaging</p>
+                            <p>Ensuring your message is impactful and resonates with media audiences.</p>
+                        </div>
+                        <div>
+                            <p>Credibility Building</p>
+                            <p>Strengthening your brand's reputation through consistent media presence.</p>
+                        </div>
+                        <div>
+                            <p>Global Reach</p>
+                            <p>Leveraging digital and traditional platforms for widespread recognition.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="item" id="press-release-writing">
+                <img src="C:\Users\user\Documents\Elucidation Hub\images\white-male-1856173_1920-removebg-preview.png">
+                <div class="introduce">
+                    <div class="title">PRESS RELEASE WRITING</div>
+                    <div class="topic">Make Headlines That Matter.</div>
+                    <div class="des">
+                        
+                        We craft clear, compelling press releases that capture attention, ensuring your news, events, or initiatives stand out with precision and newsworthiness                    </div>
+                    <button class="seeMore">SEE MORE ↗</button>
+                </div>
+                <div class="detail">
+                    <div class="title">"What makes your news stand out?"</div>
+                    <div class="des">
+                        
+                        Crafting Stories That Matter ~~~~ Elucidation Hub transforms your news into compelling press releases that captivate audiences and media alike. From product launches to major announcements, we ensure your message is clear, newsworthy, and impactful
+                      </div>
+                    <div class="specifications">
+                        <div>
+                            <p>Compelling Narratives</p>
+                            <p>Creating engaging press releases that capture attention.</p>
+                        </div>
+                        <div>
+                            <p>Clear Messaging</p>
+                            <p>Ensuring that every announcement is precise and impactful.</p>
+                        </div>
+                        <div>
+                            <p>Newsworthy Content</p>
+                            <p>Highlighting what makes your story stand out.</p>
+                        </div>
+                        <div>
+                            <p>Tailored Distribution</p>
+                            <p>Reaching the right audience for maximum impact.</p>
+                        </div>
+                        <div>
+                            <p>Brand Visibility</p>
+                            <p>Boosting recognition with well-crafted press releases.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item" id="crisis-communication">
+                <img src="C:\Users\user\Documents\Elucidation Hub\images\white-male-1889001_1920-removebg-preview.png">
+                <div class="introduce">
+                    <div class="title">CRISIS COMMUNICATION</div>
+                    <div class="topic">Guarding Reputations in Storms.</div>
+                    <div class="des">
+
+                        Our Crisis Communication services focus on protecting your reputation by delivering strategic media training, response plans, and proactive reputation management during critical times.                    </div>
+                    <button class="seeMore">SEE MORE ↗</button>
+                </div>
+                <div class="detail">
+                    <div class="title">How do we safeguard your reputation?</div>
+                    <div class="des">
+                        
+                        Your Reputation, Our Priority ~~~~ Navigating a crisis requires expertise and precision. Our crisis communication services provide proactive strategies, media training, and response plans that safeguard your brand's reputation when it matters most.                    </div>
+                    <div class="specifications">
+                        <div>
+                            <p>Proactive Planning</p>
+                            <p>Developing strategies to manage potential crises effectively.</p>
+                        </div>
+                        <div>
+                            <p>Media Training</p>
+                            <p>Preparing your team for professional media interactions during crises.</p>
+                        </div>
+                        <div>
+                            <p>Reputation Protection</p>
+                            <p>BSafeguarding your brand’s image through strategic responses.</p>
+                        </div>
+                        <div>
+                            <p>Real-Time Solutions</p>
+                            <p>Addressing challenges promptly to minimize impact.</p>
+                        </div>
+                        <div>
+                            <p>Long-Term Trust</p>
+                            <p>Ensuring stakeholders remain confident in your brand post-crisis.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item" id="brand-strategy">
+                <img src="C:\Users\user\Documents\Elucidation Hub\images\brand-1027862_1920-removebg-preview.png">
+                <div class="introduce">
+                    <div class="title">BRAND STRATEGY</div>
+                    <div class="topic">Define, Refine, Shine.</div>
+                    <div class="des">
+                        
+                        We help define and enhance your brand's identity through strategic planning, visual identity development, and consistent messaging, ensuring your brand resonates powerfully with your target audience.                     </div>
+                    <button class="seeMore">SEE MORE ↗</button>
+                </div>
+                <div class="detail">
+                    <div class="title">"What defines your unique identity?"</div>
+                    <div class="des">
+                        
+                        Defining Your Unique Identity ~~~~ From visual identity to messaging, we help you define and refine your brand. Our strategic approach ensures consistency across all channels, making your brand resonate with its audience and stand out in a competitive landscape.                    </div>
+                    <div class="specifications">
+                        <div>
+                            <p>Identity Definition</p>
+                            <p>Clarifying your brand’s core values and mission.</p>
+                        </div>
+                        <div>
+                            <p>Visual Consistency</p>
+                            <p>Designing cohesive visual elements for your brand.</p>
+                        </div>
+                        <div>
+                            <p>Strategic Messaging</p>
+                            <p>Crafting key messages that resonate with audiences.</p>
+                        </div>
+                        <div>
+                            <p>Brand Audits</p>
+                            <p>Analyzing current positioning to identify improvement areas.</p>
+                        </div>
+                        <div>
+                            <p>Market Connection</p>
+                            <p>Aligning your brand with your target audience effectively.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item" id="content-creation">
+                <img src="C:\Users\user\Documents\Elucidation Hub\images\to-paint-1874771_1920-removebg-preview.png">
+                <div class="introduce">
+                    <div class="title">CONTENT CREATION</div>
+                    <div class="topic">Words That Work Wonders.</div>
+                    <div class="des">
+                        
+                        Elucidation Hub specializes in creating high-quality, audience-tailored content, including articles, blogs, newsletters, and marketing materials that effectively communicate your message.
+   
+                    </div>
+                    <button class="seeMore">SEE MORE ↗</button>
+                </div>
+                <div class="detail">
+                    <div class="title">What story do you want to tell?</div>
+                    <div class="des">
+                        
+                        Content That Speaks Volumes ~~~~ Elucidation Hub creates high-quality, tailored content that communicates your brand's message effectively. Whether it’s blogs, newsletters, or marketing materials, our content drives engagement and builds credibility.
+                      
+                    </div>
+                    <div class="specifications">
+                        <div>
+                            <p>Audience-Centric Content</p>
+                            <p>Tailoring content to engage your target demographic.</p>
+                        </div>
+                        <div>
+                            <p>Multi-Format Expertise</p>
+                            <p>Producing blogs, articles, newsletters, and more.</p>
+                        </div>
+                        <div>
+                            <p>Quality Assurance</p>
+                            <p>Ensuring every piece is polished and professional.</p>
+                        </div>
+                        <div>
+                            <p>Engagement Focus</p>
+                            <p>Creating content designed to captivate and convert.</p>
+                        </div>
+                        <div>
+                            <p>Consistency in Voice</p>
+                            <p>Maintaining a unified tone across all platforms.</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="arrows">
+            <button id="prev-2"></button>
+            <button id="next-2">></button>
+            <button id="back-2">See All ↗</button>
+        </div>
+    </div>
+
+<!-- Third Hero Section -->
+<section class="hero" data-aos="fade-up">
+    <h1>Looking for More?</h1>
+    <p>We’re just getting started! Dive into even more ways we can help your brand shine. 
+        From cutting-edge market research to seamless website development, discover what other various services we offer.</p>
+        <a href="#thought-leadership-development" class="contact-button">Discover More</a>
+  </section>
+
+    <div class="carousel" id="carousel-3">
+        <div class="list">
+            <!-- Item 1: Market Research & Analysis -->
+            <div class="item" id="market-research-&-analysis">
+                <img src="C:\Users\user\Documents\Elucidation Hub\images\discussion-1874792_1920-removebg-preview.png">
+                <div class="introduce">
+                    <div class="title">MARKET RESEARCH & ANALYSIS</div>
+                    <div class="topic">Insights That Drive Action.</div>
+                    <div class="des">
+                        Through thorough market research and analysis, we uncover key trends, audience insights, and competitive dynamics to inform effective and innovative communication strategies.
+                    </div>
+                    <button class="seeMore">SEE MORE ↗</button>
+                </div>
+                <div class="detail">
+                    <div class="title">What insights drive your success?</div>
+                    <div class="des">
+                        Insights That Inform Strategy ~~~~  Through comprehensive market research and analysis, we uncover trends, audience insights, and competitive dynamics. These insights drive communication strategies that are both effective and innovative.
+                    </div>
+                    <div class="specifications">
+                        <div>
+                            <p>Trend Analysis</p>
+                            <p>Identifying key industry trends for strategic advantage.</p>
+                        </div>
+                        <div>
+                            <p>Audience Insights</p>
+                            <p>Understanding customer preferences and behaviors.</p>
+                        </div>
+                        <div>
+                            <p>Competitive Intelligence</p>
+                            <p>Analyzing competitors to inform your strategies.</p>
+                        </div>
+                        <div>
+                            <p>Data-Driven Decisions</p>
+                            <p>Using insights to create impactful communication plans.</p>
+                        </div>
+                        <div>
+                            <p>Future-Proofing</p>
+                            <p>Ensuring strategies adapt to evolving market conditions.</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+    
+            <!-- Item 2: Stakeholder Engagement -->
+            <div class="item" id="stakeholder-engagement">
+                <img src="C:\Users\user\Documents\Elucidation Hub\images\dollar-2091763_1920-removebg-preview.png">
+                <div class="introduce">
+                    <div class="title">STAKEHOLDER ENGAGEMENT</div>
+                    <div class="topic">Building Bonds That Last.</div>
+                    <div class="des">
+                        Our Stakeholder Engagement strategies build strong connections with key players by fostering meaningful communication and relationships to support your business goals.
+                    </div>
+                    <button class="seeMore">SEE MORE ↗</button>
+                </div>
+                <div class="detail">
+                    <div class="title">How do we strengthen key relationships?</div>
+                    <div class="des">
+                        Strengthening Key Relationships ~~~~ We identify and connect with your key stakeholders, building strong, meaningful relationships that align with your business goals. Our strategies foster trust and collaboration, driving long-term success.
+                    </div>
+                    <div class="specifications">
+                        <div>
+                            <p>Key Stakeholder Identification</p>
+                            <p>Recognizing influential stakeholders for your success.</p>
+                        </div>
+                        <div>
+                            <p>Relationship Building</p>
+                            <p>Creating meaningful and productive partnerships.</p>
+                        </div>
+                        <div>
+                            <p>Effective Communication</p>
+                            <p>Developing strategies to convey your message clearly.</p>
+                        </div>
+                        <div>
+                            <p>Goal Alignment</p>
+                            <p>Ensuring stakeholder interests align with business goals.</p>
+                        </div>
+                        <div>
+                            <p>Long-Term Trust</p>
+                            <p>Fostering lasting, positive relationships.</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+    
+            <!-- Item 3: Thought Leadership Development -->
+            <div class="item" id="thought-leadership-development">
+                <img src="C:\Users\user\Documents\Elucidation Hub\images\meeting-1020230_1920-removebg-preview.png">
+                <div class="introduce">
+                    <div class="title">THOUGHT LEADERSHIP DEVELOPMENT</div>
+                    <div class="topic">Positioning You as the Expert.</div>
+                    <div class="des">
+                        We position our clients as industry leaders through insightful content creation, strategic placements, and speaking opportunities, showcasing expertise and building authority.
+                    </div>
+                    <button class="seeMore">SEE MORE ↗</button>
+                </div>
+                <div class="detail">
+                    <div class="title">How do we position you as a leader?</div>
+                    <div class="des">
+                        Positioning You as an Authority ~~~~  Through insightful content, strategic placements, and speaking opportunities, we establish your position as an industry leader. Our approach showcases your expertise and builds trust with your audience.
+                    </div>
+                    <div class="specifications">
+                        <div>
+                            <p>Industry Expertise</p>
+                            <p>Showcasing your knowledge to build credibility.</p>
+                        </div>
+                        <div>
+                            <p>Strategic Content Placement</p>
+                            <p>Positioning content in key industry platforms.</p>
+                        </div>
+                        <div>
+                            <p>Speaking Opportunities</p>
+                            <p>Highlighting your expertise through public appearances.</p>
+                        </div>
+                        <div>
+                            <p>Reputation Building</p>
+                            <p>Establishing you as a go-to authority in your field.</p>
+                        </div>
+                        <div>
+                            <p>Audience Engagement</p>
+                            <p>Strengthening connections with your followers.</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="item" id="advertising-&-promotions">
+                <img src="C:\Users\user\Documents\Elucidation Hub\images\white-male-1871447_1920-removebg-preview.png">
+                <div class="introduce">
+                        <div class="title">ADVERTISING & PROMOTIONS</div>
+                        <div class="topic">Visibility Meets Impact.</div>
+                        <div class="des">
+                            We design impactful advertising strategies and promotional campaigns, combined with metrics-driven evaluation, to ensure maximum visibility and measurable results for your brand.
+                        </div>
+                        <button class="seeMore">SEE MORE ↗</button>
+                    </div>
+                    <div class="detail">
+                        <div class="title">How do we maximize your visibility?</div>
+                        <div class="des">
+                            Visibility Meets Strategy ~~~~ Elucidation Hub designs targeted advertising and promotional campaigns to maximize your brand’s reach. We combine creative strategies with metrics-driven evaluations for measurable, impactful results.
+                        </div>
+                        <div class="specifications">
+                            <div>
+                                <p>Creative Campaigns</p>
+                                <p>Designing ads that captivate and convert.</p>
+                            </div>
+                            <div>
+                                <p>Metrics-Driven Strategies</p>
+                                <p>Using analytics to optimize campaigns.</p>
+                            </div>
+                            <div>
+                                <p>Targeted Promotions</p>
+                                <p>Reaching the right audience effectively.</p>
+                            </div>
+                            <div>
+                                <p>Brand Visibility</p>
+                                <p>Maximizing exposure across channels.</p>
+                            </div>
+                            <div>
+                                <p>ROI-Focused Results</p>
+                                <p>Delivering measurable and impactful outcomes.</p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+    
+            <div class="item" id="website-development">
+                <img src="C:\Users\user\Documents\Elucidation Hub\images\internet-1026473_1920-removebg-preview.png">
+                <div class="introduce">
+                    <div class="title">WEBSITE DEVELOPMENT</div>
+                    <div class="topic">Your Digital Front Door.</div>
+                    <div class="des">
+                        Our Website Development and Optimization services ensure your online presence is both visually appealing and highly functional, effectively communicating your brand message and enhancing user experience.
+                    </div>
+                    <button class="seeMore">SEE MORE ↗</button>
+                </div>
+                <div class="detail">
+                    <div class="title">How does your digital presence speak?</div>
+                    <div class="des">
+                        Your Brand, Digitally Perfected ~~~~ Our website development services ensure your online presence is visually appealing, functional, and user-friendly. We communicate your brand’s message effectively, enhancing user engagement and experience.
+                    </div>
+                    <div class="specifications">
+                        <div>
+                            <p>Custom Designs</p>
+                            <p>Creating visually appealing websites tailored to your brand.</p>
+                        </div>
+                        <div>
+                            <p>User-Friendly Interfaces</p>
+                            <p>Enhancing user experience through intuitive navigation.</p>
+                        </div>
+                        <div>
+                            <p>Mobile Optimization</p>
+                            <p>Ensuring websites perform seamlessly on all devices.</p>
+                        </div>
+                        <div>
+                            <p>Brand Messaging Integration</p>
+                            <p>Aligning website content with your core values.</p>
+                        </div>
+                        <div>
+                            <p>Performance Enhancement</p>
+                            <p>Optimizing loading times and functionality for users.</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <!-- Item 4: Internal Communication -->
+            <div class="item" id="internal-communication">
+                <img src="C:\Users\user\Documents\Elucidation Hub\images\meeting-1015591_1920-removebg-preview.png">
+                <div class="introduce">
+                    <div class="title">INTERNAL COMMUNICATION</div>
+                    <div class="topic">Align and Engage</div>
+                    <div class="des">
+                        Elucidation Hub strengthens organizational alignment by developing effective communication strategies and materials that foster employee engagement and seamless internal collaboration.
+                    </div>
+                    <button class="seeMore">SEE MORE ↗</button>
+                </div>
+                <div class="detail">
+                    <div class="title">How do we keep everyone aligned?</div>
+                    <div class="des">
+                        Stay Aligned, Stay Connected ~~~~ At Elucidation Hub, we design internal communication strategies that enhance organizational alignment and engagement. From seamless collaboration tools to impactful employee messaging, we ensure your team stays connected and motivated, fostering a thriving work environment.
+                    </div>
+                    <div class="specifications">
+                        <div>
+                            <p>Enhanced Team Alignment</p>
+                            <p>Strategies to synchronize team goals and efforts across the organization.</p>
+                        </div>
+                        <div>
+                            <p>Engaging Employee Messaging</p>
+                            <p>Delivering impactful communications that boost employee morale and clarity.</p>
+                        </div>
+                        <div>
+                            <p>Seamless Collaboration Tools</p>
+                            <p>Providing resources to improve communication and teamwork.</p>
+                        </div>
+                        <div>
+                            <p>Organizational Connectivity</p>
+                            <p>Fostering better connections among all levels of the organization.</p>
+                        </div>
+                        <div>
+                            <p>Thriving Work Environment</p>
+                            <p>Creating an atmosphere of open dialogue and shared goals.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Item 5: Event Management -->
+            <div class="item" id="event-management">
+                <img src="C:\Users\user\Documents\Elucidation Hub\images\dj-1816224_1920-removebg-preview.png">
+                <div class="introduce">
+                    <div class="title">EVENT MANAGEMENT</div>
+                    <div class="topic">Events That Elevate.</div>
+                    <div class="des">
+                        From press conferences to product launches and social celebrations, we deliver expertly planned and executed events that captivate audiences and enhance engagement.
+                    </div>
+                    <button class="seeMore">SEE MORE ↗</button>
+                </div>
+                <div class="detail">
+                    <div class="title">"What makes your events unforgettable?"</div>
+                    <div class="des">
+                        Creating Memorable Experiences ~~~~ From press conferences to product launches, we plan and execute events that leave a lasting impact. Our meticulous attention to detail ensures flawless execution and unforgettable experiences.
+                    </div>
+                    <div class="specifications">
+                        <div>
+                            <p>Detailed Planning</p>
+                            <p>Managing every aspect of event logistics.</p>
+                        </div>
+                        <div>
+                            <p>Creative Themes</p>
+                            <p>Designing events that captivate and engage audiences.</p>
+                        </div>
+                        <div>
+                            <p>Flawless Execution</p>
+                            <p>Ensuring everything runs seamlessly on the day.</p>
+                        </div>
+                        <div>
+                            <p>Audience Impact</p>
+                            <p>Creating memorable experiences for attendees.</p>
+                        </div>
+                        <div>
+                            <p>Post-Event Analysis</p>
+                            <p>Evaluating success and identifying areas for improvement.</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    
+        <!-- Navigation Buttons -->
+        <div class="arrows">
+            <button id="prev-3">←</button>
+            <button id="next-3">→</button>
+            <button id="back-3">See All ↗</button>
+        </div>
+    </div>
+    
+
+    <script src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+    
+// Select all carousels
+const carousels = document.querySelectorAll('.carousel');
+
+carousels.forEach((carousel, index) => {
+    const nextButton = carousel.querySelector(`#next-${index + 1}`);
+    const prevButton = carousel.querySelector(`#prev-${index + 1}`);
+    const backButton = carousel.querySelector(`#back-${index + 1}`);
+    const listHTML = carousel.querySelector('.list');
+    const seeMoreButtons = carousel.querySelectorAll('.seeMore');
+
+    console.log(`Initializing carousel ${index + 1}`);
+
+    // Attach click events to "next" and "prev" buttons
+    nextButton.addEventListener('click', () => {
+        console.log(`Next button clicked for carousel ${index + 1}`);
+        showSlider(carousel, listHTML, 'next');
+    });
+
+    prevButton.addEventListener('click', () => {
+        console.log(`Previous button clicked for carousel ${index + 1}`);
+        showSlider(carousel, listHTML, 'prev');
+    });
+
+    // Attach click event to "back" button
+    backButton.addEventListener('click', () => {
+        console.log(`Back button clicked for carousel ${index + 1}`);
+        carousel.classList.remove('showDetail');
+    });
+
+    // Attach click events to "See More" buttons
+    seeMoreButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            console.log(`"See More" clicked for carousel ${index + 1}`);
+            carousel.classList.add('showDetail'); // Add the showDetail class
+        });
+    });
+});
+
+// Function to move the slider
+const showSlider = (carousel, listHTML, type) => {
+    const items = Array.from(listHTML.children); // Get all items as an array
+    carousel.classList.remove('next', 'prev');
+
+    if (type === 'next') {
+        // Move the first item to the end
+        const firstItem = items.shift(); // Remove the first item
+        listHTML.appendChild(firstItem); // Append it to the end
+    } else {
+        // Move the last item to the start
+        const lastItem = items.pop(); // Remove the last item
+        listHTML.prepend(lastItem); // Prepend it to the start
+    }
+
+    carousel.classList.add(type);
+};
+
+// Anchor link navigation for carousel items
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function (e) {
+        e.preventDefault(); // Prevent default anchor scroll
+        const targetId = this.getAttribute('href').substring(1); // Get the ID without the #
+        const targetItem = document.querySelector(`.item#${targetId}`);
+
+        if (targetItem) {
+            const list = targetItem.closest('.carousel .list');
+            while (!list.firstElementChild.isSameNode(targetItem)) {
+                list.appendChild(list.firstElementChild); // Move items to the end
+            }
+
+            // Scroll to the specific carousel section
+            targetItem.closest('.carousel').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+            });
+        }
+    });
+});
+
+const swiper = new Swiper(".mySwiper", {
+    loop: true,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
+
+</script>
+
+<script>
+    const heroSwiper = new Swiper('.heroSwiper', {
+      effect: 'fade',
+      fadeEffect: { crossFade: true },
+      loop: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      speed: 900,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      on: {
+        autoplayTimeLeft(swiper, time, progress) {
+          const bar = document.querySelector('.swiper-progress-bar .progress');
+          if (bar) {
+            bar.style.width = `${progress * 100}%`;
+          }
+        },
+        slideChangeTransitionStart() {
+          const bar = document.querySelector('.swiper-progress-bar .progress');
+          if (bar) {
+            bar.style.width = '0%';
+          }
+        }
+      }
+    });
+    </script>
+
+<script>
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('header');
+      if(window.scrollY > 10) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+    </script>
+
+<script>
+    const navToggle = document.querySelector('.nav-toggle');
+    const navList = document.querySelector('.main-navigation ul');
+    
+    navToggle.addEventListener('click', () => {
+      navList.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', navList.classList.contains('open'));
+    });
+    </script>
+
+<script>
+    window.addEventListener('scroll', () => {
+      // Get all sections that have an ID (for nav links)
+      const sections = document.querySelectorAll('section[id], .carousel[id]');
+      const navLinks = document.querySelectorAll('.main-navigation a');
+    
+      let currentSection = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 120; // Adjust offset for sticky header
+        if (window.scrollY >= sectionTop) {
+          currentSection = section.getAttribute('id');
+        }
+      });
+    
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (currentSection && link.getAttribute('href').includes(currentSection)) {
+          link.classList.add('active');
+        }
+      });
+    });
+    </script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      once: true
+    });
+  </script>
+
+<button id="backToTop" aria-label="Back to top">↑</button>
+<script>
+    window.addEventListener('scroll', () => {
+      document.getElementById('backToTop').classList.toggle('show', window.scrollY > 300);
+    });
+    document.getElementById('backToTop').onclick = () => window.scrollTo({top:0, behavior:'smooth'});
+    </script>
+
+</body>
+</html>
