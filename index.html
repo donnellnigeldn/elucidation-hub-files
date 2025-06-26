@@ -1545,7 +1545,8 @@ p {
 #backToTop {
   position: fixed;
   bottom: 32px;
-  right: 32px;
+  left: 32px;      /* Move to bottom left */
+  right: auto;     /* Remove right positioning */
   background: #ffbc2a;
   color: #181818;
   border: none;
@@ -1561,40 +1562,7 @@ p {
 }
 #backToTop.show { display: block; }
 
-/* Responsive fixes for third carousel */
-#carousel-3 {
-  margin-bottom: 120px; /* Add space below carousel for the back-to-top button */
-}
 
-@media (max-width: 900px) {
-  #carousel-3 .list .item {
-    width: 100%;
-    font-size: 80%;
-    height: auto;
-  }
-  #carousel-3 .list .item img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-  }
-  #carousel-3 .introduce,
-  #carousel-3 .detail {
-    max-width: 95vw;
-    padding: 10px;
-    font-size: 0.95em;
-  }
-  #carousel-3 .arrows {
-    bottom: 20px !important;
-    margin-top: 40px;
-  }
-}
-
-/* Ensure arrows are above the back-to-top button */
-#carousel-3 .arrows {
-  z-index: 2100;
-  position: relative;
-  margin-bottom: 60px;
-}
 
     </style>
 </head>
