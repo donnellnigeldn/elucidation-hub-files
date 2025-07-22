@@ -2680,47 +2680,44 @@ carousels.forEach((carousel, index) => {
     const listHTML = carousel.querySelector('.list');
     const seeMoreButtons = carousel.querySelectorAll('.seeMore');
 
-    console.log(`Initializing carousel ${index + 1}`);
+    if (!nextButton || !prevButton || !backButton || !listHTML) {
+        console.error(`Missing elements for carousel ${index + 1}`);
+        return;
+    }
 
     // Attach click events to "next" and "prev" buttons
     nextButton.addEventListener('click', () => {
-        console.log(`Next button clicked for carousel ${index + 1}`);
         showSlider(carousel, listHTML, 'next');
     });
 
     prevButton.addEventListener('click', () => {
-        console.log(`Previous button clicked for carousel ${index + 1}`);
         showSlider(carousel, listHTML, 'prev');
     });
 
     // Attach click event to "back" button
     backButton.addEventListener('click', () => {
-        console.log(`Back button clicked for carousel ${index + 1}`);
         carousel.classList.remove('showDetail');
     });
 
     // Attach click events to "See More" buttons
     seeMoreButtons.forEach((button) => {
         button.addEventListener('click', () => {
-            console.log(`"See More" clicked for carousel ${index + 1}`);
-            carousel.classList.add('showDetail'); // Add the showDetail class
+            carousel.classList.add('showDetail');
         });
     });
 });
 
 // Function to move the slider
 const showSlider = (carousel, listHTML, type) => {
-    const items = Array.from(listHTML.children); // Get all items as an array
+    const items = Array.from(listHTML.children);
     carousel.classList.remove('next', 'prev');
 
     if (type === 'next') {
-        // Move the first item to the end
-        const firstItem = items.shift(); // Remove the first item
-        listHTML.appendChild(firstItem); // Append it to the end
+        const firstItem = items.shift();
+        listHTML.appendChild(firstItem);
     } else {
-        // Move the last item to the start
-        const lastItem = items.pop(); // Remove the last item
-        listHTML.prepend(lastItem); // Prepend it to the start
+        const lastItem = items.pop();
+        listHTML.prepend(lastItem);
     }
 
     carousel.classList.add(type);
@@ -2729,17 +2726,16 @@ const showSlider = (carousel, listHTML, type) => {
 // Anchor link navigation for carousel items
 document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', function (e) {
-        e.preventDefault(); // Prevent default anchor scroll
-        const targetId = this.getAttribute('href').substring(1); // Get the ID without the #
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
         const targetItem = document.querySelector(`.item#${targetId}`);
 
         if (targetItem) {
             const list = targetItem.closest('.carousel .list');
             while (!list.firstElementChild.isSameNode(targetItem)) {
-                list.appendChild(list.firstElementChild); // Move items to the end
+                list.appendChild(list.firstElementChild);
             }
 
-            // Scroll to the specific carousel section
             targetItem.closest('.carousel').scrollIntoView({
                 behavior: 'smooth',
                 block: 'start',
@@ -2854,9 +2850,12 @@ const swiper = new Swiper(".mySwiper", {
 
 <script>
     window.addEventListener('scroll', () => {
-      document.getElementById('backToTop').classList.toggle('show', window.scrollY > 300);
+      const backToTopButton = document.getElementById('backToTop');
+      if (backToTopButton) {
+        backToTopButton.classList.toggle('show', window.scrollY > 300);
+        backToTopButton.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     });
-    document.getElementById('backToTop').onclick = () => window.scrollTo({top:0, behavior:'smooth'});
     </script>
 <button id="backToTop" aria-label="Back to top">↑</button>
 
