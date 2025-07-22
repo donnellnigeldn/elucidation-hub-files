@@ -1556,10 +1556,16 @@ p {
   font-size: 2em;
   display: none;
   cursor: pointer;
-  z-index: 2000;
+  z-index: 1000;
   box-shadow: 0 2px 8px rgba(0,0,0,0.18);
   transition: opacity 0.3s;
+  pointer-events: auto;
 }
+
+#backToTop:not(.show) {
+  pointer-events: none;
+}
+
 #backToTop.show { display: block; }
 
 @media (max-width: 700px) {
@@ -2846,13 +2852,13 @@ const swiper = new Swiper(".mySwiper", {
     });
   </script>
 
-<button id="backToTop" aria-label="Back to top">↑</button>
 <script>
     window.addEventListener('scroll', () => {
       document.getElementById('backToTop').classList.toggle('show', window.scrollY > 300);
     });
     document.getElementById('backToTop').onclick = () => window.scrollTo({top:0, behavior:'smooth'});
     </script>
+<button id="backToTop" aria-label="Back to top">↑</button>
 
 </body>
 </html>
